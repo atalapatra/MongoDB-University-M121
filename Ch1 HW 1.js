@@ -12,7 +12,7 @@ var pipeline = [
 
 // Verify pipeline
 db.movies.aggregate(pipeline).itcount()
-load('/Users/amitt/OneDrive/Career/2020-04-21 MongoDB U - Aggregation Framework/m121/chapter1/validateLab1.js')
+load('/Users/amitt/OneDrive/Career/1 - GitHub Repos - atalapatra/MongoDB-University-M121/m121/chapter1/validateLab1.js')
 validateLab1(pipeline)
 
 // Sample Code
