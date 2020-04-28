@@ -5,6 +5,10 @@ db.movies.findOne()
 db.movies.find().count()
 
 db.movies.aggregate([
+  { $limit: 100}
+]).pretty()
+
+db.movies.aggregate([
   { $limit: 5}
 ]).pretty()
 
@@ -12,6 +16,15 @@ db.movies.aggregate([
   { $match:
     {
         languages: "English"
+    }
+  },
+  { $limit: 5}
+]).pretty()
+
+db.movies.aggregate([
+  { $match:
+    {
+        awards: {$exists:true}
     }
   },
   { $limit: 5}
