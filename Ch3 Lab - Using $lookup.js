@@ -15,3 +15,5 @@ db.air_alliances.aggregate([
       $in: ["747", "380"] } } }
   // ,{ $limit: 10 }
 ]).pretty()
+
+db.movies.find().count()
