@@ -14,4 +14,4 @@ db.movies.aggregate([
   },
   { $sort: { numFilms: -1 } },
   { $limit: 1 }
-]).pretty().
+]).pretty()
