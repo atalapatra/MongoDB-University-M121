@@ -1,5 +1,7 @@
 // Useful code
 
+db.getCollectionNames()
+
 db.movies.findOne()
 
 db.movies.find().count()
@@ -14,6 +16,10 @@ db.movies.aggregate([
   { $limit: 5}
 ]).pretty()
 
+db.companies.aggregate([
+  { $limit: 5}
+]).pretty()
+
 db.movies.aggregate([
   { $match:
     {
@@ -21,6 +27,21 @@ db.movies.aggregate([
     }
   },
   { $limit: 5}
+]).pretty()
+
+db.movies.aggregate([
+  { $match:
+    {
+        languages: "English"
+    }
+  },
+  { $project: {
+    _id:0,
+    cast:1
+    } 
+  },
+  { $unwind: "$cast" }//,
+  // { $limit: 5}
 ]).pretty()
 
 db.movies.aggregate([
