@@ -1,16 +1,28 @@
 db.movies.aggregate([
-    { $match:
-      {
-          "imdb.rating": { $gte: 0},
-          metacritic: { $gte: 0}
-      }
-    },
-    { $project: {
-        _id:0,
-        title:1,
-        "imdb.rating":1,
-        metacritic:1
-        } 
+  { $facet : { 
+    "topTenImdb" : [
+      { $match: {
+        "imdb.rating": { $gt: 0},
+        metacritic: { $gt: 0}
+        }
       },
-    { $limit: 100}
-  ])//.pretty()
+      { $sort : { "imdb.rating" : -1 } },
+      { $limit : 10 }
+      ],
+    "topTenMetacritic" : [
+      { $match: {
+        "imdb.rating": { $gt: 0},
+        metacritic: { $gt: 0}
+        }
+      },
+      { $sort : { "metacritic" : -1 } },
+      { $limit : 10 }
+      ]
+    }
+  },
+	{ $project : {
+	    "commonTopFilms" : {
+			$size : {
+				$setIntersection : [ "$topTenImdb", "$topTenMetacritic" ]
+      } }	} }
+])
